@@ -22,4 +22,9 @@ Rails.application.routes.draw do
     end
   end
   mount flipper_app, at: '/flipper'
+
+  Spree::Core::Engine.routes.draw do
+
+    post 'admin/products/imports', to: 'admin/products#imports', as: 'imports'
+  end
 end
