@@ -54,6 +54,7 @@ group :development, :test do
 
   gem 'listen'
   gem 'rubocop', require: false
+  gem 'rubocop-rails'
 
   # monitoring
   gem 'bullet'
