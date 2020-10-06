@@ -92,5 +92,5 @@
 <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>
 
 <%= form_tag({ :action => :imports }, multipart: true) do %>
-    <%= file_field_tag(:file, { onchange: "this.form.submit()" }) %>
+    <%= file_field_tag(:file, { onchange: "this.form.submit()", accept: 'text/csv' }) %>
 <% end %>
