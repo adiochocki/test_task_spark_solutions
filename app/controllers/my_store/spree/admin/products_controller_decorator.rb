@@ -1,5 +1,4 @@
 module MyStore::Spree::Admin::ProductsControllerDecorator
-  require 'csv'
 
   def imports
     if params[:file].present? && params[:file].content_type == 'text/csv'
