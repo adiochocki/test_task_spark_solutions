@@ -1,7 +1,9 @@
 module Products
   class CreateFromCsv
     class << self
-      def call(shipping_category, stock_location, taxonomy, csv_row)
+      def call(csv_row)
+        shipping_category = find_shipping_category
+        taxonomy = find_taxonomy(csv_row.to_h['category'])
 
         created_product = Spree::Product.where(name: csv_row['name']).first_or_create! do |product|
           product.name = csv_row['name']
@@ -14,13 +16,22 @@ module Products
           product.taxons << taxonomy
         end
 
-        add_stock(created_product, stock_location, csv_row['stock_total'])
+        created_product.add_stock(find_stock_location, csv_row['stock_total'])
+        created_product
       end
 
       private
 
-      def add_stock(product, stock_location, number)
-        product.stock_items.find_by!(stock_location: stock_location).update!(count_on_hand: number)
+      def find_shipping_category
+        Spree::ShippingCategory.find_or_create_by!(name: 'Default')
+      end
+
+      def find_stock_location
+        Spree::StockLocation.find_or_create_by!(name: 'default')
+      end
+
+      def find_taxonomy(category)
+        Spree::Taxon.find_or_create_by!(name: category)
       end
     end
   end

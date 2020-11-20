@@ -1,13 +1,7 @@
-class ScheduleCreateProduct
-  include Sidekiq::Worker
-
+class ScheduleCreateProduct < ApplicationJob
   sidekiq_options retry: false, queue: :default
 
-  def perform(csv_row, stock_id, taxonomy_id)
-    default_shipping_category = Spree::ShippingCategory.find_by!(name: 'Default')
-    default_stock_location = Spree::StockLocation.find(stock_id)
-    taxonomy = Spree::Taxon.find(taxonomy_id)
-
-    Products::CreateFromCsv.call(default_shipping_category, default_stock_location, taxonomy, csv_row)
+  def perform(csv_row)
+    Products::CreateFromCsv.call(csv_row)
   end
 end
