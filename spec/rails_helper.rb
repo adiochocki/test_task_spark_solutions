@@ -3,6 +3,8 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'sidekiq/testing'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 include Warden::Test::Helpers
@@ -44,6 +46,8 @@ require 'spree/api/testing_support/v2/current_order'
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # Sidekiq::Testing.inline!
+  # Sidekiq::Testing.disable!
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

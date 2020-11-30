@@ -1,3 +1,5 @@
+require: rubocop-rails
+
 AllCops:
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
@@ -6,7 +8,7 @@ AllCops:
   # line option.
   UseCache: true
 
-  TargetRubyVersion: 2.5.1
+  TargetRubyVersion: 2.7.1
 
   Exclude:
     - db/schema.rb
@@ -19,9 +21,6 @@ AllCops:
 
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-
-AlignParameters:
-  Enabled: false
 
 ClassLength:
   CountComments: false
@@ -93,10 +92,7 @@ Style/PercentLiteralDelimiters:
 Naming/VariableNumber:
   Enabled: false
 
-Performance/RegexpMatch:
-  Enabled: false
-
-Style/UnneededPercentQ:
+Style/RedundantPercentQ:
   Enabled: false
 
 Lint/ParenthesesAsGroupedExpression:
